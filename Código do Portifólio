@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - João Pedro Nogueira</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        header {
+            background: #1e1e1e;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #222;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #ff6600;
+            border-radius: 5px;
+        }
+
+        section {
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+            text-align: left;
+        }
+
+        h2 {
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 5px;
+        }
+
+        #galeria-projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .projeto-item {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .projeto-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        button {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e65c00;
+        }
+
+        #contato a {
+            color: #ff6600;
+            text-decoration: none;
+        }
+
+        #contato a:hover {
+            text-decoration: underline;
+        }
+    </style>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - João Pedro Nogueira</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>João Pedro Nogueira</h1>
+        <p>Especialista em Criação Publicitária, Motion Graphics e UX/UI</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#sobre" class="nav-link">Sobre</a></li>
+            <li><a href="#projetos" class="nav-link">Projetos</a></li>
+            <li><a href="#contato" class="nav-link">Contato</a></li>
+        </ul>
+    </nav>
+    <section id="sobre">
+        <h2>Sobre Mim</h2>
+        <p>Estudei por dois anos com os melhores profissionais do mercado de Motion Design, atuando na criação de comerciais para internet e televisão.</p>
+        <p>Estou em bootcamp e especialização técnica para aperfeiçoamento em UX/UI Design, já atuando na área há 2 anos.</p>
+        <p>Atuei na equipe de marketing do Flamengo e Fluminense, criando comerciais e banners vistos mundialmente.</p>
+        <p>Trabalhei em projetos para Estados Unidos, Portugal, Inglaterra e Itália, com foco em Landing Pages, Experiência do Usuário, Motion Graphics e Design Gráfico.</p>
+    </section>
+    <section id="projetos">
+        <h2>Projetos</h2>
+        <div id="galeria-projetos">
+            <!-- Projetos serão adicionados dinamicamente -->
+        </div>
+        <input type="file" id="uploadProjeto" accept="image/*">
+        <button onclick="adicionarProjeto()">Enviar Projeto</button>
+    </section>
+    <section id="contato">
+        <h2>Contato</h2>
+        <p>Email: <a href="mailto:joao.nogueira.gons@gmail.com">joao.nogueira.gons@gmail.com</a></p>
+        <p>WhatsApp: <a href="https://wa.me/5535999316206" target="_blank">+55 (35) 9 9931-6206</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/nogueirazz" target="_blank">@nogueirazz</a></p>
+    </section>
+    <script>
+        function adicionarProjeto() {
+            const input = document.getElementById('uploadProjeto');
+            const galeria = document.getElementById('galeria-projetos');
+            if (input.files.length > 0) {
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.classList.add('projeto-item');
+                    div.innerHTML = `<img src="${e.target.result}" alt="Projeto">`;
+                    galeria.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Adicionando rolagem suave ao clicar nos links do menu
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
